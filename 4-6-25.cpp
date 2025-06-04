@@ -24,4 +24,3 @@ class Solution {
     }
 };
 
-//GFG POTD solution for 04 June

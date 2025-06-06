@@ -1,6 +1,6 @@
 
 class Solution {
-  int mod = 1e5;
+  long long mod = 1e5;
     public:
         vector <int> search(string pat, string txt){
             vector<int>ans;

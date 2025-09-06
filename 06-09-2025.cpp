@@ -1,45 +1,35 @@
-class Solution {
-  public:
-    Node* segregate(Node* head) {
-        if(!head) return head;
-        
-        Node* zeroDummy = new Node(-1);
-        Node* oneDummy = new Node(-1);
-        Node* twoDummy = new Node(-1);
-        
-        Node* zero = zeroDummy;
-        Node* one = oneDummy;
-        Node* two = twoDummy;
-        
-        Node* temp = head;
-        
-        while(temp){
-            if(temp->data == 0){
-                zero->next = temp;
-                zero = zero->next;
-            } else if(temp->data == 1){
-                one->next = temp;
-                one = one->next;
-            } else {
-                two->next = temp;
-                two = two->next;
-            }
-            temp = temp->next;
-        }
-        
-        
-        zero->next = (oneDummy->next) ? oneDummy->next : twoDummy->next;
-        one->next = twoDummy->next;
-        two->next = nullptr; 
-        
-        Node* result = zeroDummy->next;
-        
-        
-        delete zeroDummy;
-        delete oneDummy;
-        delete twoDummy;
-        
-        return result;
+/*
+class Node {
+ public:
+    int data;
+    Node *next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
     }
 };
+*/
 
+class Solution {
+  public:
+    int helper(Node* slow){
+        Node* t = slow->next;
+        int count = 1;
+        while(t != slow){
+            count++;
+            t = t->next;
+        }
+        return count;
+    }
+    int lengthOfLoop(Node *head) {
+        Node *slow = head, *fast = head;
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast) return helper(slow);
+        }
+        return 0;
+    }
+};
+//GFG POTD solution for 06 September
